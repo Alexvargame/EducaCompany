@@ -1,0 +1,45 @@
+﻿{% extends 'educa/educa_base.html'%}
+ 
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Детализация проекта
+{% endblock %}
+
+
+{% block content %}
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item">Названия {{internship.name}}</li>
+		<li class="list-group-item">Направления{% for dirs in internship.get_direction%}{{dirs}}</br>{%endfor%}</li>
+		<li class="list-group-item">Руководители-{% for direct in internship.get_director%}{{direct}}</br>{%endfor%}</a></li>
+  	  	<li class="list-group-item">Cписок курсов-{% for course in internship.get_courses%}<a href="{{course.get_absolute_url}}">{{course}}</a></br>{%endfor%}</li>
+		<li class="list-group-item">Интерны-{% for intern in internship.get_interns%}{{intern}}</br>{%endfor%}</li>
+	  <p>Дополнительная информация</p>
+  	  	<li class="list-group-item"></li>
+ 	 </ul>
+	</div>
+
+	{% if request.user.is_authenticated %}
+		<div class="obj-panel">
+			 <p>Выбрать</p>
+				 {% block obj-panel%}
+					<a class="btn btn-light" href="{{internship.get_update_url}}">Редактировать</a>
+					<a class="btn btn-danger" href="{{internship.get_delete_url}}">Del</a>
+					<a class="btn btn-light" href="{% url 'internships_list_url'%}">Вернуться к списку</a>
+				 {%endblock%}
+		</div>
+	{% endif%}
+	{% if request.user.is_authenticated %}
+	 <form action="{% url 'internship_enroll_url' %}" method="post">
+		 {{ enroll_form }}
+		 {% csrf_token %}
+		 <input class="btn btn-light" type="submit" class="button" value="Записаться">
+	 </form>
+	{% else %}
+		 <a href="{% url 'student_registration' %}" class="button">
+		 Register to enroll
+		 </a>
+	{% endif %}
+{% endblock %} 
+

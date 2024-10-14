@@ -1,0 +1,63 @@
+﻿{% extends 'educa/educa_base.html'%}
+
+<h1 xmlns="http://www.w3.org/1999/html">HI</h1>
+ 
+{% block title %}
+		
+	Курсы
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 40%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+
+	 <details>
+	  <summary>Список</summary>
+
+		<table>
+			<tr>
+				<th style="width:5%">Название</th>
+				 <th style="width:5%">Проект</th>
+				 <th style="width:5%">Содержание</th>
+
+			 </tr>
+
+			{% for report in reports %}
+
+				<tr>
+					<td style="font-size:80%"> <a href="{{report.get_absolute_url}}"> {{report.name}}</a></td>
+					<td style="font-size:80%;">{{report.project}}</td>
+					<td style="font-size:80%;">{{report.description}}</td>
+
+
+
+				</tr>
+
+			{%endfor%}
+
+		</table>
+
+	 </details>
+
+<a class="btn btn-primary" href="{% url 'course_create_url'%}" role="button">Новый курс</a>
+
+{{s}}
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->

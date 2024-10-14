@@ -1,0 +1,74 @@
+﻿{% extends 'educa/educa_base.html'%}
+
+<h1 xmlns="http://www.w3.org/1999/html">HI</h1>
+ 
+{% block title %}
+		
+	Интернатура
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 40%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+
+	<p>Отметьте интернатуру </p>
+		{% if request.user.is_authenticated %}
+			<table style="width:40%">
+							<tr>
+
+								 <th style="width:5%">Интернатура</th>
+								 <th style="width:5%">Курсы</th>
+							</tr>
+
+
+							<tr>
+
+								{%for key,value in form.items%}
+
+
+							<div class="form-group">
+
+								<td style="font-size:100%;width:50%">
+									<form action="{% url 'course_choice_unenroll_url'%}" method='post'>
+
+										{% csrf_token %}
+										{{ key }}
+										 <input class="btn btn-light" type="submit" class="button" value="Выбрать">
+									</form>
+								</td>
+								<td style="font-size:100%;width:50%">
+									{%for v in value%}
+										{{v}}
+									{%endfor%}
+								</td>
+							</div>
+							</tr>
+							{%endfor%}
+			</table>
+
+			{% else %}
+			 <a href="{% url "student_registration" %}" class="button">
+				Register to enroll
+			 </a>
+		{% endif %}
+
+{{s}}
+{% endblock %} 
+
+

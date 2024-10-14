@@ -1,0 +1,58 @@
+﻿{% extends 'educa/educa_base.html'%}
+ 
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Новый курс
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 100%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+	
+	<form action="{% url 'course_create_url' %}" method='post' enctype="multipart/form-data">
+			{% csrf_token %}
+		<div class="form-group">
+			<table style="width:40%">
+				<tr>	
+					<td style="font-size:100%;width:50%"> Название  {{form.name}}</td>
+					<td style="font-size:100%;width:50%"> Руководители {{form.owner}}</td>
+					<td style="font-size:100%;width:50%"> Интернатура {{form.internship}}</td>
+					<td style="font-size:100%;width:50%"> Тип курса {{form.type}}</td>
+
+
+			</table>
+			<table style="width:40%">
+				<tr>
+					<td style="font-size:100%;width:50%">Темы курса {{form_theme.themes}}</td>
+
+				</tr>
+			</table>
+		</div>
+
+		
+		<button type="submit" class="btn btn-primary">Сохранить</button>
+	</form>
+
+{{message}}
+
+{% endblock %} 
+
+

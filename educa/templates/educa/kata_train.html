@@ -1,0 +1,32 @@
+﻿{% extends 'educa/educa_base.html'%}
+ 
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Решение задачи
+{% endblock %}
+
+
+{% block content %}
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item">Названия {{kata.name}}</li>
+	 	<li class="list-group-item">Содержание {{kata.base}}</li>
+ 	 </ul>
+	{{message}}
+	<form action="{% url 'kata_train_url' internship_id=internship_id course_id=course_id theme_id=theme_id pk=kata.id %}" method='post' enctype="multipart/form-data">
+			{% csrf_token %}
+		<div class="form-group">
+			<table style="width:40%">
+				<tr>
+					<td style="font-size:100%;width:50%"> Ответ {{form.answer}}</td>
+
+			</table>
+		</div>
+
+
+		<button type="submit" class="btn btn-primary">Отправить</button>
+	</form>
+
+
+{% endblock %} 

@@ -1,0 +1,34 @@
+﻿{% extends 'educa/educa_base.html'%}
+ 
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Детализация задачи
+{% endblock %}
+
+
+{% block content %}
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item">Названия {{kata.name}}</li>
+		<li class="list-group-item">Авторы {% for own in kata.get_owner%}{{own}}</br>{%endfor%}</li>
+		<li class="list-group-item">Список тем, в которых используется:</br>  {% for theme in kata.get_themes%}<a href="{{theme.get_absolute_url}}">{{theme}}</br></a>{%endfor%}</li>
+	 	<li class="list-group-item">Содержание {{kata.base}}</li>
+ 	 </ul>
+
+	</div>
+
+	{% if request.user.is_authenticated %}
+		<div class="obj-panel">
+			 <p>Выбрать</p>
+				 {% block obj-panel%}
+					<a class="btn btn-light" href="{{kata.get_update_url}}">Редктировать</a>
+					<a class="btn btn-danger" href="{{kata.get_delete_url}}">Del</a>
+					<a class="btn btn-light" href="{% url 'katas_list_url'%}">Вернуться к списку</a>
+				 {%endblock%}
+		</div>
+	{% endif%}
+
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->

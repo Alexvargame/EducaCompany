@@ -1,0 +1,48 @@
+﻿{% extends 'educa/educa_base.html'%}
+
+<h1 xmlns="http://www.w3.org/1999/html">HI</h1>
+ 
+{% block title %}
+		
+	Интернатура
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 40%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+
+	<p>Отметьте темы, на которые хотите подписаться </p>
+		 <form action="{% url 'themes_enroll_url'%}" method='post' enctype="multipart/form-data">
+			{% csrf_token %}
+		<div class="form-group">
+			<table style="width:40%">
+				<tr>
+					<td style="font-size:100%;width:50%">Курсы {{form}}</td>
+
+				</tr>
+			</table>
+		</div>
+
+
+		<button type="submit" class="btn btn-primary">Подписаться</button>
+	</form>
+{{s}}
+{% endblock %} 
+
+

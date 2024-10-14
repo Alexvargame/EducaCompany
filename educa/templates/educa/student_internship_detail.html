@@ -1,0 +1,84 @@
+﻿{% extends 'educa/educa_base.html'%}
+{% load user_group_tags %}
+<h1 xmlns="http://www.w3.org/1999/html">HI</h1>
+ 
+{% block title %}
+		
+	Интернатура
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 40%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+
+	{% for internship in student.internship_joined.all%}
+		Интернатура - {{internship.name}}</br>
+		{%for course in internship.courses.all%}
+			{% if course in student.course_joined.all%}
+			Курс- {{course}}
+				{%for theme in course.course_themes.all%}
+				<p>Тема: {{theme}}</p>
+				<table> Задачи
+						<tr>
+							 <th style="width:5%">Название</th>
+							 <th style="width:5%">Содержание</th>
+							 <th style="width:5%">Оценка</th>
+						 </tr>
+						{% for kata in theme.get_kata %}
+									<tr>
+										<td style="font-size:80%"> <a href="{% url 'kata_train_url' internship_id=internship.id course_id=course.id theme_id=theme.id pk=kata.id%}">
+											{{kata.name}}
+										</a></td>
+										<td style="font-size:80%;">{{kata.base}}</td>
+										<td style="font-size:80%;">
+											{% kata_assesment student.profile.assesments internship.id course.id theme.id 'kata' kata.id%}
+										</td>
+									</tr>
+						{%endfor%}
+				</table>
+				<table> Тесты
+						<tr>
+							 <th style="width:5%">Название</th>
+							 <th style="width:5%">Содержание</th>
+							 <th style="width:5%">Оценка</th>
+						 </tr>
+						{% for test in theme.get_test %}
+									<tr>
+										<td style="font-size:80%"> <a href="{% url 'test_train_url' internship_id=internship.id course_id=course.id theme_id=theme.id pk=test.id%}"> {{test.name}}</a></td>
+										<td style="font-size:80%;">{{test.base}}</td>
+										<td style="font-size:80%;">
+											{% kata_assesment student.profile.assesments internship.id course.id theme.id 'test' test.id%}
+										</td>
+									</tr>
+						{%endfor%}
+				</table>
+				<p>Общая оценка по теме: {% theme_assesment student.profile.assesments internship.id course.id theme.id %}</p>
+				</br>
+			{%endfor%}
+			<p>Общая оценка по курсу: {% course_assesment student.profile.assesments internship.id course.id %}</p>
+			{%endif%}</br>
+
+		{%endfor%}
+		<p>Общая оценка по интернатуре: {% internship_assesment student.profile.assesments internship.id  %}</p>
+	{%endfor%}
+
+{{s}}
+{% endblock %} 
+
+

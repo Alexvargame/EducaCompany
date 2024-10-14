@@ -1,0 +1,20 @@
+﻿{% extends 'educa/educa_base.html'%}
+ 
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Удаление курса
+{% endblock %}
+
+
+{% block content %}
+	<form action="{{course.get_delete_url}}" method='post'>
+		{% csrf_token %}
+	<h3>Вы уверены, что хотите удалить объект?<b>"{{course.name}}"</b></h3>
+	<a href="{{course.get_absolute_url}}">Отменить</a>
+	<button type="submit" class="btn btn-danger">Удалить</button>
+	</form>
+{% endblock %} 
+
+

@@ -1,0 +1,64 @@
+﻿{% extends 'educa/educa_base.html'%}
+
+<h1 xmlns="http://www.w3.org/1999/html">HI</h1>
+ 
+{% block title %}
+		
+	Темы
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 40%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+
+	 <details>
+	  <summary>Список</summary>
+
+		<table>
+			<tr>
+				 <th style="width:5%">Название</th>
+				 <th style="width:5%">Курсы</th>
+				 <th style="width:5%">Задачи</th>
+				 <th style="width:5%">Тесты</th>
+
+			 </tr>
+
+			{% for theme in themes %}
+
+				<tr>
+					<td style="font-size:80%"> <a href="{{theme.get_absolute_url}}"> {{theme.name}}</a></td>
+					<td style="font-size:80%;">{%for th in theme.get_course%}{{th}}</br>{%endfor%}</td></td>
+					<td style="font-size:80%;">{%for th in theme.get_kata%}{{th}}</br>{%endfor%}</td>
+					<td style="font-size:80%;">{%for th in theme.get_test%}{{th}}</br>{%endfor%}</td></td>
+
+
+				</tr>
+
+			{%endfor%}
+
+		</table>
+
+	 </details>
+
+<a class="btn btn-primary" href="{%url 'theme_create_url'%}" role="button">Новая тема</a>
+
+{{s}}
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->

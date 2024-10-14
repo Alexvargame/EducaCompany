@@ -1,0 +1,39 @@
+﻿{% extends 'educa/educa_base.html'%}
+ 
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Детализация очета
+{% endblock %}
+
+
+{% block content %}
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item">Названия {{report.name}}</li>
+		<li class="list-group-item">Автор {{report.internshiper}}</li>
+		<li class="list-group-item">Проект{{report.project}}</li>
+		<li class="list-group-item">Содержание {{report.decription}}</li>
+
+
+	  <p>Дополнительная информация</p>
+  	  	<li class="list-group-item"></li>
+ 	 </ul>
+
+	</div>
+
+	{% if request.user.is_authenticated %}
+		<div class="obj-panel">
+			 <p>Выбрать</p>
+				 {% block obj-panel%}
+					<a class="btn btn-light" href="{{report.get_update_url}}">Редктировать</a>
+					<a class="btn btn-danger" href="">Del</a>
+					<a class="btn btn-light" href="{% url 'reports_list_url'%}">Вернуться к списку</a>
+				 {%endblock%}
+		</div>
+	{% endif%}
+
+
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->

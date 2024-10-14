@@ -1,0 +1,38 @@
+﻿{% extends 'educa/educa_base.html'%}
+ 
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Детализация темы
+{% endblock %}
+
+
+{% block content %}
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item">Названия {{course.name}}</li>
+		<li class="list-group-item">Авторы {% for own in course.get_owner%}{{own}}</br>{%endfor%}</li>
+		<li class="list-group-item">Список курсов, в которых используется:</br>  {% for course in theme.get_course%}<a href="{{course.get_absolute_url}}">{{course}}</br></a>{%endfor%}</li>
+  	  	<li class="list-group-item">Cписок задач -{% for kata in theme.get_kata%}<a href="{{kata.get_absolute_url}}">{{kata}}</a></br>{%endfor%}</li>
+		<li class="list-group-item">Cписок тестов-{% for test in theme.get_test%}<a href="{{test.get_absolute_url}}">{{test}}</a></br>{%endfor%}</li>
+	  	<li class="list-group-item">Cписок интернов -{% for i in theme.get_interns%}{{i}}</br>{%endfor%}</li>
+		<p>Дополнительная информация</p>
+  	  	<li class="list-group-item"></li>
+ 	 </ul>
+
+	</div>
+
+	{% if request.user.is_authenticated %}
+		<div class="obj-panel">
+			 <p>Выбрать</p>
+				 {% block obj-panel%}
+					<a class="btn btn-light" href="{{theme.get_update_url}}">Редктировать</a>
+					<a class="btn btn-danger" href="{{theme.get_delete_url}}">Del</a>
+					<a class="btn btn-light" href="{% url 'themes_list_url'%}">Вернуться к списку</a>
+				 {%endblock%}
+		</div>
+	{% endif%}
+
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->

@@ -1,0 +1,62 @@
+﻿{% extends 'educa/educa_base.html'%}
+
+<h1 xmlns="http://www.w3.org/1999/html">HI</h1>
+ 
+{% block title %}
+		
+	Проекты
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 40%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+
+	 <details>
+	  <summary>Проекты</summary>
+
+		<table>
+			<tr>
+				<th style="width:5%">Название</th>
+				 <th style="width:5%">Направление</th>
+				 <th style="width:5%">Руководитель</th>
+				 <th style="width:5%">Задача</th>
+			 </tr>
+
+			{% for project in projects %}
+
+				<tr>
+					<td style="font-size:80%"> <a href="{{project.get_absolute_url}}"> {{project.name}}</a></td>
+					<td style="font-size:80%;">{%for proj in project.get_direction%}{{proj}}</br>{%endfor%}</td>
+					<td style="font-size:80%;">{%for proj in project.get_director%}{{proj}}</br>{%endfor%}</td>
+					<td style="font-size:80%;">{{project.task}}</td>
+
+				</tr>
+
+			{%endfor%}
+
+		</table>
+
+	 </details>
+
+<a class="btn btn-primary" href="{%url 'project_create_url'%}" role="button">Новый проект</a>
+
+{{s}}
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->

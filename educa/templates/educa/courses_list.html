@@ -1,0 +1,62 @@
+﻿{% extends 'educa/educa_base.html'%}
+
+<h1 xmlns="http://www.w3.org/1999/html">HI</h1>
+ 
+{% block title %}
+		
+	Курсы
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 40%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+
+	 <details>
+	  <summary>Список</summary>
+
+		<table>
+			<tr>
+				<th style="width:5%">Название</th>
+				 <th style="width:5%">Интернатура</th>
+				 <th style="width:5%">Тип</th>
+
+			 </tr>
+
+			{% for course in courses %}
+
+				<tr>
+					<td style="font-size:80%"> <a href="{{course.get_absolute_url}}"> {{course.name}}</a></td>
+					<td style="font-size:80%;">{%for intern in course.get_internship%}{{intern}}</br>{%endfor%}</td>
+					<td style="font-size:80%;">{{course.type}}</td>
+
+
+				</tr>
+
+			{%endfor%}
+
+		</table>
+
+	 </details>
+
+<a class="btn btn-primary" href="{% url 'course_create_url'%}" role="button">Новый курс</a>
+
+{{s}}
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->

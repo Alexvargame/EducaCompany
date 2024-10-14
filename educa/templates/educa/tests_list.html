@@ -1,0 +1,60 @@
+﻿{% extends 'educa/educa_base.html'%}
+
+<h1 xmlns="http://www.w3.org/1999/html">HI</h1>
+ 
+{% block title %}
+		
+	Тесты
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 40%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+
+	 <details>
+	  <summary>Список</summary>
+
+		<table>
+			<tr>
+
+				 <th style="width:5%">Название</th>
+				 <th style="width:5%">Содержание</th>
+
+			 </tr>
+
+			{% for test in tests %}
+
+				<tr>
+					<td style="font-size:80%"> <a href="{{test.get_absolute_url}}"> {{test.name}}</a></td>
+					<td style="font-size:80%;">{{test.base}}</td>
+
+				</tr>
+
+			{%endfor%}
+
+		</table>
+
+	 </details>
+
+<a class="btn btn-primary" href="{%url 'test_create_url'%}" role="button">Новый тест</a>
+
+{{s}}
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->

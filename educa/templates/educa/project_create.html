@@ -1,0 +1,57 @@
+﻿{% extends 'educa/educa_base.html'%}
+ 
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Новый проект
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 100%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+	
+	<form action="{% url 'project_create_url' %}" method='post' enctype="multipart/form-data">
+			{% csrf_token %}
+		<div class="form-group">
+			<table style="width:40%">
+				<tr>	
+					<td style="font-size:100%;width:50%"> Название  {{form.name}}</td>
+					<td style="font-size:100%;width:50%"> Направления {{form.direction}}</td>
+					<td style="font-size:100%;width:50%"> Руководители {{form.director}}</td>
+
+
+			</table>
+			<table style="width:40%">
+				<tr>
+					<td style="font-size:100%;width:50%">Задача {{form.task}}</td>
+
+				</tr>
+			</table>
+		</div>
+
+		
+		<button type="submit" class="btn btn-primary">Сохранить</button>
+	</form>
+
+{{message}}
+
+{% endblock %} 
+
+

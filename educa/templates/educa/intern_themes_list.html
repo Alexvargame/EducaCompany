@@ -1,0 +1,71 @@
+﻿{% extends 'educa/educa_base.html'%}
+
+<h1 xmlns="http://www.w3.org/1999/html">HI</h1>
+ 
+{% block title %}
+		
+	Интернатура
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 40%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+
+
+	{%for course in courses%}
+		<p>Курс: {{course.name}}</p>
+		{%for theme in course.get_themes%}
+			<p>Тема: {{theme.name}}</p>
+			<table> Задачи
+
+					<tr>
+
+						 <th style="width:5%">Название</th>
+						 <th style="width:5%">Содержание</th>
+
+					 </tr>
+					{% for kata in theme.get_kata %}
+								<tr>
+									<td style="font-size:80%"> <a href="{{kata.get_absolute_url}}"> {{kata.name}}</a></td>
+									<td style="font-size:80%;">{{kata.base}}</td>
+								</tr>
+					{%endfor%}
+			</table>
+			<table> Тесты
+					<tr>
+
+						 <th style="width:5%">Название</th>
+						 <th style="width:5%">Содержание</th>
+
+					 </tr>
+					{% for test in theme.get_test %}
+								<tr>
+									<td style="font-size:80%"> <a href="{{test.get_absolute_url}}"> {{test.name}}</a></td>
+									<td style="font-size:80%;">{{test.base}}</td>
+								</tr>
+				{%endfor%}
+
+			</table>
+			</br>
+		{%endfor%}
+	{%endfor%}
+{{s}}
+{% endblock %} 
+
+

@@ -1,0 +1,35 @@
+﻿{% extends 'educa/educa_base.html'%}
+ 
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Содержание  теста
+{% endblock %}
+
+
+{% block content %}
+	Содержание
+	<table>
+			<tr>
+
+				 <th style="width:20%">Вопрос</th>
+				 <th style="width:20%">Варианты</th>
+
+			 </tr>
+
+			{% for key,value in dict_text.items %}
+
+				<tr>
+					<td style="font-size:80%"> <a href=""> {{key}}</a></td>
+					<td style="font-size:80%;">{% for v in value%}{{v}}</br>{%endfor%}</td>
+
+				</tr>
+
+			{%endfor%}
+
+		</table>
+
+{% endblock %} 
+
+

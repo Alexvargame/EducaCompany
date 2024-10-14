@@ -1,0 +1,93 @@
+﻿{% extends 'educa/educa_base.html'%}
+{% load user_group_tags %}
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Детализация проекта
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 40%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item">Названия {{project.name}}</li>
+		<li class="list-group-item">Направления{% for dirs in project.get_direction%}{{dirs}}</br>{%endfor%}</li>
+		<li class="list-group-item">Руководители-{% for direct in project.get_director%}{{direct}}</br>{%endfor%}</a></li>
+  	  	<li class="list-group-item">Задача-{{project.task}}</li>
+ 	 </ul>
+
+	</div>
+	{% if request.user.is_authenticated %}
+	 <form action="{% url 'project_enroll_url' %}" method="post">
+		 {{ enroll_form }}
+		 {% csrf_token %}
+		 <input class="btn btn-light" type="submit" class="button" value="Записаться">
+	 </form>
+	{% else %}
+		 <a href="{% url "student_registration" %}" class="button">
+		 Register to enroll
+		 </a>
+	{% endif %}
+
+	 {% if user.is_authenticated  and user|has_group:'Directors' %}
+		<div class="obj-panel">
+			 <p>Выбрать</p>
+				 {% block obj-panel%}
+					<a class="btn btn-light" href="">Редктировать</a>
+					<a class="btn btn-danger" href="{{project.get_delete_url}}">Del</a>
+					<a class="btn btn-light" href="{% url 'projects_list_url'%}">Вернуться к списку</a>
+				 {%endblock%}
+		</div>
+
+	  <p>Дополнительная информация</p>
+		<table>
+			<tr>
+				<th style="width:5%">Название</th>
+				 <th style="width:5%">Стажер</th>
+				 <th style="width:5%">Отчет</th>
+			 </tr>
+
+			{% for report in project.project_report.all %}
+
+				<tr>
+					<td style="font-size:80%"> <a href="{{report.get_absolute_url}}"> {{report.name}}</a></td>
+					<td style="font-size:80%;">{{report.internshiper}}</td>
+					<td style="font-size:80%;">
+						{%for key, value in report.description.items%}
+							{{key}}
+						 	<details>
+	  						<summary>Детали</summary>
+								{{value}}
+							</details>
+						</br>
+						{%endfor%}
+					</td>
+				</tr>
+
+			{%endfor%}
+
+		</table>
+
+
+	{% endif%}
+
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->

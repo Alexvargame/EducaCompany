@@ -1,0 +1,60 @@
+﻿{% extends 'educa/educa_base.html'%}
+
+<h1 xmlns="http://www.w3.org/1999/html">HI</h1>
+ 
+{% block title %}
+		
+	Задачи
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 40%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+
+	 <details>
+	  <summary>Список</summary>
+
+		<table>
+			<tr>
+
+				 <th style="width:5%">Название</th>
+				 <th style="width:5%">Содержание</th>
+
+			 </tr>
+
+			{% for kata in katas %}
+
+				<tr>
+					<td style="font-size:80%"> <a href="{{kata.get_absolute_url}}"> {{kata.name}}</a></td>
+					<td style="font-size:80%;">{{kata.base}}</td>
+
+				</tr>
+
+			{%endfor%}
+
+		</table>
+
+	 </details>
+
+<a class="btn btn-primary" href="{%url 'kata_create_url'%}" role="button">Новая задача</a>
+
+{{s}}
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->

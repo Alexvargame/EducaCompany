@@ -1,0 +1,40 @@
+﻿{% extends 'educa/educa_base.html'%}
+ 
+	<h1>HI</h1>
+ 
+{% block title %}
+		
+	Детализация курса
+{% endblock %}
+
+
+{% block content %}
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item">Названия {{course.name}}</li>
+		<li class="list-group-item">Авторы {% for own in course.get_owner%}{{own}}</br>{%endfor%}</li>
+		<li class="list-group-item">Тип {{course.type}}</li>
+		<li class="list-group-item">Интернатура  {% for intern in course.get_internship%}{{intern}}</br>{%endfor%}</li>
+  	  	<li class="list-group-item">Cписок тем -{% for theme in course.get_themes%}<a href="{{theme.get_absolute_url}}">{{theme}}</a></br>{%endfor%}</li>
+		<li class="list-group-item">Cписок интернов -{% for i in course.get_interns%}{{i}}</br>{%endfor%}</li>
+
+	  <p>Дополнительная информация</p>
+  	  	<li class="list-group-item"></li>
+ 	 </ul>
+
+	</div>
+
+	{% if request.user.is_authenticated %}
+		<div class="obj-panel">
+			 <p>Выбрать</p>
+				 {% block obj-panel%}
+					<a class="btn btn-light" href="{{course.get_update_url}}">Редктировать</a>
+					<a class="btn btn-danger" href="{{course.get_delete_url}}">Del</a>
+					<a class="btn btn-light" href="{% url 'courses_list_url'%}">Вернуться к списку</a>
+				 {%endblock%}
+		</div>
+	{% endif%}
+
+
+{% endblock %} 
+
+<!--{flat.get_absolute_url}-->

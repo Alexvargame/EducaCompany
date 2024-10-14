@@ -1,0 +1,49 @@
+﻿{% extends 'educa/educa_base.html'%}
+{% load user_group_tags %}
+<h1 xmlns="http://www.w3.org/1999/html">HI</h1>
+ 
+{% block title %}
+		
+	Мои проекты
+{% endblock %}
+
+
+{% block content %}
+	<style>
+		table {
+ 		 font-family: arial, sans-serif;
+ 		 border-collapse: collapse;
+ 		 width: 40%;
+		}
+
+		td, th {
+  		border: 1px solid #dddddd;
+  		text-align: left;
+  		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+  		background-color: #dddddd;
+		}
+	</style>
+
+	{% for project in internshiper.internshiper_joined.all%}
+
+		<table> Проекты
+			<tr>
+				<th style="width:5%">Название</th>
+				<th style="width:5%">Содержание</th>
+				<th style="width:5%">Руководитель</th>
+			</tr>
+			<tr>
+				<td style="font-size:80%"> <a href="{{project.get_absolute_url}}">{{project.name}}</a></td>
+				<td style="font-size:80%;">{{project.base}}</td>
+				<td style="font-size:80%;">{{project.director}}</td>
+			</tr>
+		</table>
+	{%endfor%}
+
+{{s}}
+{% endblock %} 
+
+
